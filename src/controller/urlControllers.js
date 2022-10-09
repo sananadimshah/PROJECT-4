@@ -83,7 +83,7 @@ const urlShorter = async function (req, res) {
       if (checkURL) {
         await SET_ASYNC(`${longUrl}`, JSON.stringify(checkURL));
         return res
-          .status(409)
+          .status(200)
           .send({
             status: true,
             msg: "Url already present in MongoDb",
@@ -128,7 +128,7 @@ const getUrlcode = async function (req, res) {
     let data = req.params.urlCode;
     if (!shortid.isValid(data)) {
       return res
-        .status(404)
+        .status(400)
         .send({ status: false, msg: "please give valid url code" });
     }
 
